@@ -10,7 +10,7 @@ Provides `net.jqwik.api.lifecycle.LifecycleHook`s to enable usage of Mockito wit
 Maven:
 ```xml
 <dependency>
-    <group>net.jqwik.mockito</group>
+    <group>net.jqwik</group>
     <artifactId>jqwik-mockito</artifactId>
     <version>$LATEST_VERSION</version>
     <scope>test</scope>
@@ -19,7 +19,7 @@ Maven:
 
 Gradle:
 ```
-testImplementation("net.jqwik.mockito:jqwik-mockito:$LATEST_VERSION")
+testImplementation("net.jqwik:jqwik-mockito:$LATEST_VERSION")
 ```
 
 ### Usage in Tests
