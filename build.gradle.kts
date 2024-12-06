@@ -88,13 +88,14 @@ dependencies {
 publishing {
     repositories {
         maven {
-            // hint: password is in ~/.gradle/gradle.properties
-            val ossrhUsername: String = project.findProperty("ossrhUsername") as? String ?: ""
-            val ossrhPassword: String = project.findProperty("ossrhPassword") as? String ?: ""
+            // hint: credentials are in ~/.gradle/gradle.properties
+            // Since June 2024 Sonatype seems to require a token for publishing
+            val repoUsername: String = project.findProperty("tokenUsername") as? String ?: ""
+            val repoPassword: String = project.findProperty("tokenPassword") as? String ?: ""
 
             credentials {
-                username = ossrhUsername
-                password = ossrhPassword
+                username = repoUsername
+                password = repoPassword
             }
 
             val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
