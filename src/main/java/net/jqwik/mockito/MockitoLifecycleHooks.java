@@ -3,27 +3,16 @@
  */
 package net.jqwik.mockito;
 
-import net.jqwik.api.lifecycle.AroundPropertyHook;
-import net.jqwik.api.lifecycle.AroundTryHook;
-import net.jqwik.api.lifecycle.Lifespan;
-import net.jqwik.api.lifecycle.PropagationMode;
-import net.jqwik.api.lifecycle.PropertyExecutionResult;
-import net.jqwik.api.lifecycle.PropertyExecutor;
-import net.jqwik.api.lifecycle.PropertyLifecycleContext;
-import net.jqwik.api.lifecycle.Store;
-import net.jqwik.api.lifecycle.TryExecutionResult;
-import net.jqwik.api.lifecycle.TryExecutor;
-import net.jqwik.api.lifecycle.TryLifecycleContext;
-import org.mockito.Mockito;
-import org.mockito.MockitoSession;
-import org.mockito.internal.configuration.plugins.Plugins;
-import org.mockito.internal.session.MockitoSessionLoggerAdapter;
-import org.mockito.junit.jupiter.MockitoSettings;
-import org.mockito.quality.Strictness;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import org.apiguardian.api.*;
+import org.mockito.*;
+import org.mockito.internal.configuration.plugins.*;
+import org.mockito.internal.session.*;
+import org.mockito.junit.jupiter.*;
+import org.mockito.quality.*;
+
+import net.jqwik.api.lifecycle.*;
 
 /**
  * Provides {@link net.jqwik.api.lifecycle.LifecycleHook}s to enable usage of Mockito with jqwik.
@@ -54,61 +43,62 @@ import java.util.Optional;
  *
  * @see net.jqwik.api.lifecycle.AddLifecycleHook
  */
+@API(status = API.Status.EXPERIMENTAL, since = "0.0.1")
 public class MockitoLifecycleHooks implements AroundPropertyHook, AroundTryHook {
-    // type Object[]
-    private static final String MOCKS = "net.jqwik.mockito.mocks";
+	// type Object[]
+	private static final String MOCKS = "net.jqwik.mockito.mocks";
 
-    @Override
-    public PropagationMode propagateTo() {
-        return PropagationMode.ALL_DESCENDANTS;
-    }
+	@Override
+	public PropagationMode propagateTo() {
+		return PropagationMode.ALL_DESCENDANTS;
+	}
 
-    @Override
-    public PropertyExecutionResult aroundProperty(PropertyLifecycleContext context, PropertyExecutor propertyExecutor)
-            throws Throwable {
-        final List<Object> testInstances = context.testInstances();
+	@Override
+	public PropertyExecutionResult aroundProperty(PropertyLifecycleContext context, PropertyExecutor propertyExecutor)
+		throws Throwable {
+		final List<Object> testInstances = context.testInstances();
 
-        // finds all mocked fields within the test instance object
-        MockitoSession session = null;
-        try {
-            final List<Object> mockList = new ArrayList<>();
+		// finds all mocked fields within the test instance object
+		MockitoSession session = null;
+		try {
+			final List<Object> mockList = new ArrayList<>();
 
-            final Optional<Strictness> actualStrictness =
-                    context.findAnnotationsInContainer(MockitoSettings.class).stream()
-                            .findFirst()
-                            .map(MockitoSettings::strictness);
+			final Optional<Strictness> actualStrictness =
+				context.findAnnotationsInContainer(MockitoSettings.class).stream()
+					   .findFirst()
+					   .map(MockitoSettings::strictness);
 
-            session = Mockito.mockitoSession()
-                    .initMocks(testInstances.toArray())
-                    .strictness(actualStrictness.orElse(null))
-                    .logger(new MockitoSessionLoggerAdapter(Plugins.getMockitoLogger()))
-                    .startMocking();
+			session = Mockito.mockitoSession()
+							 .initMocks(testInstances.toArray())
+							 .strictness(actualStrictness.orElse(null))
+							 .logger(new MockitoSessionLoggerAdapter(Plugins.getMockitoLogger()))
+							 .startMocking();
 
-            for (final Object testInstance : testInstances) {
-                // open all the annotated mocks, keeping track of the handle so that we can close them later
-                // mockitoCloseables.add(MockitoAnnotations.openMocks(testInstance));
-                // find all of the mocks in each of the test instances and store them in a list, so that we can reset
-                // them between tries.
-                mockList.addAll(MockFinder.getMocks(testInstance));
-            }
+			for (final Object testInstance : testInstances) {
+				// open all the annotated mocks, keeping track of the handle so that we can close them later
+				// mockitoCloseables.add(MockitoAnnotations.openMocks(testInstance));
+				// find all of the mocks in each of the test instances and store them in a list, so that we can reset
+				// them between tries.
+				mockList.addAll(MockFinder.getMocks(testInstance));
+			}
 
-            Store.create(MOCKS, Lifespan.PROPERTY, mockList::toArray);
+			Store.create(MOCKS, Lifespan.PROPERTY, mockList::toArray);
 
-            return propertyExecutor.execute();
-        } finally {
-            if (session != null) {
-                session.finishMocking();
-            }
-        }
-    }
+			return propertyExecutor.execute();
+		} finally {
+			if (session != null) {
+				session.finishMocking();
+			}
+		}
+	}
 
-    @Override
-    public TryExecutionResult aroundTry(TryLifecycleContext context, TryExecutor tryExecutor, List<Object> parameters) {
-        try {
-            return tryExecutor.execute(parameters);
-        } finally {
-            final Object[] mocks = Store.<Object[]>get(MOCKS).get();
-            Mockito.reset(mocks);
-        }
-    }
+	@Override
+	public TryExecutionResult aroundTry(TryLifecycleContext context, TryExecutor tryExecutor, List<Object> parameters) {
+		try {
+			return tryExecutor.execute(parameters);
+		} finally {
+			final Object[] mocks = Store.<Object[]>get(MOCKS).get();
+			Mockito.reset(mocks);
+		}
+	}
 }
