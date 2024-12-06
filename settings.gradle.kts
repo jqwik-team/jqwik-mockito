@@ -1,1 +1,1 @@
-rootProject.name = "jqwik-mockito-extension"
+rootProject.name = "jqwik-mockito"

@@ -13,7 +13,6 @@ val githubProjectName = "jqwik-team"
 val artifactId = "jqwik-mockito"
 val moduleGroupId = "net.jqwik"
 val moduleName = "net.jqwik.mockito"
-val junitPlatformVersion = "1.11.2"
 val junitJupiterVersion = "5.11.2"
 val opentest4jVersion = "1.3.0"
 val assertJVersion = "3.26.3"
@@ -98,7 +97,6 @@ publishing {
                 password = ossrhPassword
             }
 
-            // change URLs to point to your repos, e.g. http://my.org/repo
             val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
             url = uri(if (isSnapshotRelease) { snapshotsRepoUrl } else { releasesRepoUrl })
