@@ -2,7 +2,6 @@ plugins {
     id("java-library")
     id("maven-publish")
     id("signing")
-    id("com.diffplug.spotless") version "6.13.0"
 }
 
 fun isSnapshotRelease(versionString: String): Boolean {
@@ -39,15 +38,6 @@ tasks.jar {
     }
 }
 
-spotless {
-    java {
-        palantirJavaFormat("1.1.0")
-
-        importOrder("", "java|javax", "\\#")
-        removeUnusedImports()
-    }
-}
-
 java {
     withJavadocJar()
     withSourcesJar()
@@ -59,10 +49,6 @@ java {
 tasks.compileTestJava {
     options.compilerArgs.add("-parameters")
     options.encoding = "UTF-8"
-}
-
-tasks.named("check") {
-    dependsOn(tasks.named("spotlessApply"))
 }
 
 tasks.test {
@@ -100,7 +86,13 @@ publishing {
 
             val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
             val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-            url = uri(if (isSnapshotRelease) { snapshotsRepoUrl } else { releasesRepoUrl })
+            url = uri(
+                if (isSnapshotRelease) {
+                    snapshotsRepoUrl
+                } else {
+                    releasesRepoUrl
+                }
+            )
         }
     }
     publications {
