@@ -35,6 +35,7 @@ testImplementation("net.jqwik:jqwik-mockito:$LATEST_VERSION")
 ```java
 import net.jqwik.api.lifecycle.AddLifecycleHook;
 import net.jqwik.api.*;
+import net.jqwik.mockito.MockitoLifecycleHooks;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
