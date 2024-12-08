@@ -11,7 +11,6 @@ fun isSnapshotRelease(versionString: String): Boolean {
 val githubProjectName = "jqwik-team"
 val artifactId = "jqwik-mockito"
 val moduleGroupId = "net.jqwik"
-val moduleName = "net.jqwik.mockito"
 val junitJupiterVersion = "5.11.2"
 val opentest4jVersion = "1.3.0"
 val assertJVersion = "3.26.3"
@@ -21,7 +20,7 @@ val lombokVersion = "1.18.34"
 val jqwikMockitoVersion = "0.0.1-SNAPSHOT"
 val isSnapshotRelease = isSnapshotRelease(jqwikMockitoVersion)
 
-group = moduleName
+group = moduleGroupId
 version = jqwikMockitoVersion
 description = "Jqwik Mockito support module"
 
@@ -34,7 +33,7 @@ tasks.jar {
     archiveBaseName.set(artifactId)
     archiveVersion.set(jqwikMockitoVersion)
     manifest {
-        attributes("Automatic-Module-Name" to moduleName)
+        attributes("Automatic-Module-Name" to "net.jqwik.mockito")
     }
 }
 
