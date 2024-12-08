@@ -15,6 +15,7 @@ with jqwik.
 Maven:
 
 ```xml
+
 <dependency>
     <group>net.jqwik</group>
     <artifactId>jqwik-mockito</artifactId>
