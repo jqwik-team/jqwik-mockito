@@ -18,7 +18,7 @@ ij_wrap_on_typing = false
 [*.java]
 indent_style = tab
 max_line_length = 140
-ij_visual_guides = 80,140
+ij_visual_guides = 80, 140
 ij_java_align_consecutive_assignments = false
 ij_java_align_consecutive_variable_declarations = false
 ij_java_align_group_field_declarations = false
@@ -116,7 +116,7 @@ ij_java_for_statement_wrap = off
 ij_java_generate_final_locals = false
 ij_java_generate_final_parameters = false
 ij_java_if_brace_force = never
-ij_java_imports_layout = javax.**,java.**,|,*,|,net.jqwik.**,|,$*,|,$net.jqwik.**
+ij_java_imports_layout = javax.**, java.**, |, *, |, net.jqwik.**, |, $*, |, $net.jqwik.**
 ij_java_indent_case_from_switch = true
 ij_java_insert_inner_class_imports = false
 ij_java_insert_override_annotation = true
@@ -150,7 +150,7 @@ ij_java_method_parameters_wrap = on_every_item
 ij_java_modifier_list_wrap = false
 ij_java_names_count_to_use_import_on_demand = 1
 ij_java_new_line_after_lparen_in_record_header = false
-ij_java_packages_to_use_import_on_demand = java.awt.*,javax.swing.*
+ij_java_packages_to_use_import_on_demand = java.awt.*, javax.swing.*
 ij_java_parameter_annotation_wrap = off
 ij_java_parentheses_expression_new_line_after_left_paren = false
 ij_java_parentheses_expression_right_paren_on_new_line = false
@@ -276,11 +276,11 @@ ij_properties_key_value_delimiter = equals
 ij_properties_spaces_around_key_value_delimiter = false
 
 [{*.gson,*.gradle,*.groovy,*.gant,*.gdsl,*.gy,*.gs}]
-indent_style=tab
-tab_width=4
-max_line_length=140
+indent_style = tab
+tab_width = 4
+max_line_length = 140
 
 [{*.yml,*.yaml}]
-indent_style=space
-indent_size=2
+indent_style = space
+indent_size = 2
 

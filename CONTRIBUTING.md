@@ -26,7 +26,8 @@ I hereby agree to the terms of the jqwik-mockito Contributor Agreement.
 
 __Not formulated yet but nevertheless strictly enforced._
 
-Sticking to what `.editorconfig` provides will simplify your life when formatting jqwik-mockito code.
+Sticking to what `.editorconfig` provides will simplify your life when
+formatting jqwik-mockito code.
 
 ### Tests
 

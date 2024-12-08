@@ -1,13 +1,19 @@
 # Mockito Support for jqwik
 
-Provides `net.jqwik.api.lifecycle.LifecycleHook`s to enable usage of Mockito with jqwik.
- - Creates mocks for any fields with Mockito annotations such as `org.mockito.Mock` or `org.mockito.Spy`.
- - Resets all mocks between each try, whether those mocks were created programmatically (eg: via calls to `Mockito.mock()`}) or via annotations.
+Provides `net.jqwik.api.lifecycle.LifecycleHook`s to enable usage of Mockito
+with jqwik.
+
+- Creates mocks for any fields with Mockito annotations such as
+  `org.mockito.Mock` or `org.mockito.Spy`.
+- Resets all mocks between each try, whether those mocks were created
+  programmatically (eg: via calls to `Mockito.mock()`}) or via annotations.
 
 ## How to use
 
 ### Maven and Gradle configuration
+
 Maven:
+
 ```xml
 <dependency>
     <group>net.jqwik</group>
@@ -18,11 +24,13 @@ Maven:
 ```
 
 Gradle:
+
 ```
 testImplementation("net.jqwik:jqwik-mockito:$LATEST_VERSION")
 ```
 
 ### Usage in Tests
+
 ```java
 import net.jqwik.api.lifecycle.AddLifecycleHook;
 import net.jqwik.api.*;
@@ -69,4 +77,5 @@ class OrderServiceTest {
 ```
 
 ## Compatibility
+
 This is built against Mockito v4, and should support for all versions. 
