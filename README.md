@@ -80,4 +80,12 @@ class OrderServiceTest {
 
 ## Compatibility
 
-This is built against Mockito v4, and should support for all versions. 
+This is built against Mockito v4, but _should_ support all versions. 
+
+
+## Release Notes
+
+### 1.0.0
+
+- Uses jqwik 1.9.2
+- Tested with Mockito 4.11.0

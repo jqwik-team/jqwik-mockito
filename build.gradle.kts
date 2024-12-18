@@ -17,7 +17,7 @@ val assertJVersion = "3.26.3"
 val mockitoVersion = "4.11.0" // Mockito 5+ no longer supports Java 8
 val jqwikVersion = "1.9.2"
 val lombokVersion = "1.18.34"
-val jqwikMockitoVersion = "1.0.0-SNAPSHOT"
+val jqwikMockitoVersion = "1.0.0"
 val isSnapshotRelease = isSnapshotRelease(jqwikMockitoVersion)
 
 group = moduleGroupId
