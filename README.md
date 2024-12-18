@@ -12,10 +12,26 @@ with jqwik.
 
 ### Maven and Gradle configuration
 
-Maven:
+Keep in mind that you have to explicitly add the Mockito dependencies to your project.
+
+Currently, there is also a dependency on `mockito-junit-jupiter`. 
+This allows the use of the `@MockitoSettings` annotation.
+
+#### Maven
 
 ```xml
-
+<dependency>
+    <group>org.mockito</group>
+    <artifactId>mockito-core</artifactId>
+    <version>$MOCKITO_VERSION</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <group>org.mockito</group>
+    <artifactId>mockito-junit-jupiter</artifactId>
+    <version>$MOCKITO_VERSION</version>
+    <scope>test</scope>
+</dependency>
 <dependency>
     <group>net.jqwik</group>
     <artifactId>jqwik-mockito</artifactId>
@@ -24,9 +40,11 @@ Maven:
 </dependency>
 ```
 
-Gradle:
+#### Gradle
 
 ```
+testImplementation("org.mockito:mockito-core:$MOCKITO_VERSION")
+testImplementation("org.mockito:mockito-junit-jupiter:$MOCKITO_VERSION")
 testImplementation("net.jqwik:jqwik-mockito:$LATEST_VERSION")
 ```
 
